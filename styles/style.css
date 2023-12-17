@@ -26,11 +26,14 @@ ol {
 
 html {
     block-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .page {
-    margin: auto;
-    padding: 133px 30px;
+    padding: 130px 30px;
+    vertical-align: middle;
     color: #fff;
     font-family: "Fira Sans Condensed", sans-serif;
     font-size: 18px;
