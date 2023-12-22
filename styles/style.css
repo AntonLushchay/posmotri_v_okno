@@ -28,6 +28,12 @@ html {
     block-size: 100%;
 }
 
+/* В devtools выставил разрешение 1200х800 px,
+по pixel-perfect всё выглядит приемлемо
+Если это снова не то что нужно, то я не понмаю, что нужно.
+Мне абсолютно не понятно, что делать с информацией 
+на yandex диске, которую я получил после ревью.
+Вот как у меня: https://disk.yandex.com/i/G-aQs5Yf2SQbtA */
 .page {
     display: flex;
     justify-content: center;
@@ -97,14 +103,22 @@ html {
     background-color: transparent;
 }
 
-.search-form__textfield:focus {
-    outline: 1px solid white;
-    outline-offset: 2px;
-}
-
 .search-form__textfield:active {
     border: none;
     outline: 1px solid #fff;
+}
+
+/* ТАК! В этом месте я ОЧЕНЬ ЗОЛ!
+ОКАЗЫВАЕТСЯ! сбрасывать outline у input:focus c type=text нет необходимости!?
+ОХ, как я зол! (не на вас, конечно, уважаемы ревьюер)
+Но все же очень сильно! */
+.search-form__textfield:focus {
+    outline: none;
+}
+
+.search-form__label:has(:focus-visible) {
+    outline: 1px solid #fff;
+    outline-offset: 1px;
 }
 
 .search-form__checkbox-list {
@@ -116,11 +130,8 @@ html {
     display: flex;
     align-items: center;
     gap: 5px;
+    outline: none;
     cursor: pointer;
-}
-
-.search-form__label:hover .search-form__label-text {
-    text-decoration: underline;
 }
 
 .search-form__pseudo-checkbox {
@@ -129,6 +140,10 @@ html {
     height: 19px;
     border: 1px solid #fff;
     vertical-align: middle;
+}
+
+.search-form__label:hover .search-form__label-text {
+    text-decoration: underline;
 }
 
 .search-form__label:active .search-form__pseudo-checkbox {
@@ -149,11 +164,6 @@ html {
     background-color: #fff;
 }
 
-.search-form__label:has(.search-form__checkbox:focus-visible) {
-    outline: 1px solid #fff;
-    outline-offset: 1px;
-}
-
 .button {
     align-self: flex-end;
     width: 194px;
@@ -161,6 +171,7 @@ html {
     border: 1px solid currentColor;
     color: #fff;
     font-family: "Fira Sans Condensed", sans-serif;
+    font-weight: 700;
     font-size: 18px;
     background-color: transparent;
 }
@@ -261,34 +272,34 @@ html {
 }
 
 .content__video-card-thumbnail {
+    width: 100%;
     object-fit: cover;
     object-position: center;
-    width: 100%;
 }
 
 .content__video-card-title {
     display: inline;
+    overflow: hidden;
     color: #fff;
     font-family: Oswald, sans-serif;
     font-size: 30px;
     text-transform: uppercase;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
 }
 
 .content__video-card-description {
-    overflow: hidden;
-    color: #fff;
-    font-family: "Fira Sans Condensed", sans-serif;
-    font-weight: 400;
-    font-size: 18px;
     /* Комментарий к этому месту не полнял
     "будет лучше ограничить ширину для текстового элемента,
     что бы текст мог переноситься на новую строку"
     Так текст и так переносится на другую сточку.
     Окей, я добавил ограничение по ширине, но для чего, не понял */
     width: 100%;
+    overflow: hidden;
+    color: #fff;
+    font-family: "Fira Sans Condensed", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
 }
 
 .more-button {
